@@ -1,58 +1,374 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#080b18">
-  <meta name="description" content="Discover free browser games on RILUZO. Quick to play, fun to master.">
-  <title>RILUZO — Play Beyond Limits</title>
-  <style>
-    :root{--bg:#080b18;--panel:#11172a;--panel2:#171f36;--text:#f4f6ff;--muted:#9ba8c4;--cyan:#4de6ff;--purple:#9b7bff;--line:#26324d}
-    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 12% 0%,#28306a55,transparent 35%),radial-gradient(ellipse at 90% 30%,#00bcd422,transparent 30%),var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh}
-    a{color:inherit;text-decoration:none}.wrap{width:min(1120px,calc(100% - 40px));margin:auto}.nav{height:76px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #ffffff12}.brand{display:flex;align-items:center;gap:11px;font-size:21px;font-weight:900;letter-spacing:.12em}.mark{height:35px;width:35px;border-radius:11px;background:linear-gradient(135deg,var(--cyan),var(--purple));display:grid;place-items:center;color:#080b18;font-size:19px;box-shadow:0 0 25px #4de6ff35}.navlinks{display:flex;gap:25px;color:var(--muted);font-size:13px}.navlinks a:hover{color:var(--cyan)}
-    .hero{padding:86px 0 64px;text-align:center}.eyebrow{display:inline-flex;align-items:center;gap:8px;border:1px solid #4de6ff55;background:#4de6ff0d;color:var(--cyan);padding:8px 13px;border-radius:99px;font-size:11px;font-weight:800;letter-spacing:.13em;text-transform:uppercase}.dot{width:7px;height:7px;border-radius:50%;background:var(--cyan);box-shadow:0 0 12px var(--cyan)}h1{font-size:clamp(44px,8vw,82px);line-height:.98;letter-spacing:-.065em;margin:24px 0 18px}h1 span{background:linear-gradient(100deg,var(--cyan),#b8a4ff 70%);background-clip:text;-webkit-background-clip:text;color:transparent}.hero p{color:var(--muted);font-size:clamp(15px,2vw,18px);line-height:1.7;max-width:570px;margin:0 auto 28px}.cta{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(110deg,var(--cyan),#a9c9ff);color:#07101d;padding:13px 20px;border-radius:12px;font-weight:900;font-size:13px;box-shadow:0 10px 35px #4de6ff22}.cta:hover{transform:translateY(-2px);filter:brightness(1.07)}
-    .section-head{display:flex;align-items:end;justify-content:space-between;gap:16px;margin:8px 0 20px}.section-head h2{font-size:25px;margin:0;letter-spacing:-.03em}.section-head p{color:var(--muted);font-size:13px;margin:7px 0 0}.count{color:var(--muted);font-size:12px}.games{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:18px;padding-bottom:76px}.card{background:linear-gradient(160deg,#151e35,#0e1426);border:1px solid var(--line);border-radius:19px;overflow:hidden;transition:transform .2s,border-color .2s;}.card:hover{transform:translateY(-5px);border-color:#4de6ff77}.cover{height:175px;display:grid;place-items:center;position:relative;overflow:hidden;background:radial-gradient(circle at 50% 50%,#253d5d,#111a30 65%,#0b1020)}.cover:before,.cover:after{content:"";position:absolute;border:1px solid #4de6ff55;border-radius:50%;width:180px;height:180px}.cover:after{width:120px;height:120px;border-color:#a58cff88}.target{width:64px;height:64px;border-radius:50%;border:5px solid var(--cyan);box-shadow:0 0 25px #4de6ff99,inset 0 0 15px #4de6ff66;z-index:1;position:relative}.target:after{content:"";position:absolute;inset:15px;border-radius:50%;background:var(--cyan);box-shadow:0 0 15px var(--cyan)}.soon{font-size:34px;color:#a58cff;z-index:1;text-shadow:0 0 20px #a58cff}.cardbody{padding:18px}.tags{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:12px}.tag{font-size:10px;color:#b8c5e0;background:#ffffff0b;border:1px solid #ffffff12;border-radius:99px;padding:5px 8px}.card h3{font-size:18px;margin:0 0 7px}.card p{color:var(--muted);font-size:12px;line-height:1.6;min-height:38px;margin:0 0 16px}.play{display:flex;align-items:center;justify-content:space-between;border-top:1px solid #ffffff12;padding-top:14px;color:var(--cyan);font-size:12px;font-weight:800}.play span:last-child{font-size:17px}.coming{opacity:.72}.coming .play{color:#a9b2c9}
-    .footer{border-top:1px solid #ffffff12;padding:24px 0 34px;color:var(--muted);font-size:12px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}.footer strong{color:var(--text);letter-spacing:.12em}
-    @media(max-width:600px){.navlinks{gap:13px;font-size:11px}.hero{padding:65px 0 52px}.section-head{align-items:start;flex-direction:column}.wrap{width:min(100% - 28px,1120px)}}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#090d1b">
+<title>Perfect Timing — Reflex Arcade</title>
+<style>
+  :root {
+    --bg: #090d1b;
+    --panel: #11182b;
+    --panel2: #151f36;
+    --text: #f3f6ff;
+    --muted: #9ba8c4;
+    --cyan: #4de6ff;
+    --purple: #9b7bff;
+    --green: #65f2b2;
+    --yellow: #ffd66b;
+    --red: #ff6685;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; min-height: 100vh; color: var(--text);
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif;
+    background:
+      radial-gradient(ellipse at 50% -15%, rgba(76,91,190,.25), transparent 55%),
+      radial-gradient(ellipse at 90% 80%, rgba(49,210,219,.08), transparent 40%), var(--bg);
+    display: grid; place-items: center; padding: 22px;
+  }
+  .shell { width: min(760px, 100%); }
+  header { display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:18px; }
+  .brand { display:flex; align-items:center; gap:11px; }
+  .logo { width:38px; height:38px; border-radius:12px; display:grid; place-items:center;
+    color:#08101d; font-size:20px; font-weight:900; background:linear-gradient(135deg,var(--cyan),var(--purple));
+    box-shadow:0 0 25px #4de6ff35; }
+  h1 { font-size:18px; margin:0; letter-spacing:.02em; }
+  .subbrand { color:var(--muted); font-size:11px; margin-top:2px; letter-spacing:.12em; text-transform:uppercase; }
+  .top-best { color:var(--muted); font-size:12px; text-align:right; }
+  .top-best strong { color:var(--yellow); display:block; font-size:17px; margin-top:2px; }
+  .panel { background:linear-gradient(180deg,rgba(20,29,51,.96),rgba(14,21,39,.96));
+    border:1px solid #273451; border-radius:22px; padding:clamp(18px,4vw,30px);
+    box-shadow:0 24px 70px #0007, inset 0 1px #ffffff08; }
+  .stats { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-bottom:24px; }
+  .stat { background:#0b1223; border:1px solid #24304a; border-radius:13px; padding:11px 8px; text-align:center; }
+  .stat span { display:block; color:var(--muted); font-size:10px; text-transform:uppercase; letter-spacing:.1em; }
+  .stat strong { display:block; font-size:21px; margin-top:4px; font-variant-numeric:tabular-nums; }
+  .arena { background:radial-gradient(ellipse at center,#192844 0%,#101a30 55%,#0b1325 100%);
+    border:1px solid #2c3d5d; border-radius:18px; padding:22px 16px 18px; overflow:hidden; }
+  .arena-head { display:flex; justify-content:space-between; align-items:center; gap:10px; margin-bottom:17px; }
+  .level-label { color:var(--muted); font-size:12px; letter-spacing:.1em; text-transform:uppercase; }
+  .level-label b { color:var(--cyan); font-size:14px; margin-left:5px; }
+  .status { font-size:11px; color:var(--green); background:#65f2b212; border:1px solid #65f2b238; padding:5px 9px; border-radius:99px; }
+  .track-wrap { position:relative; padding:27px 2px 34px; }
+  .track { height:16px; border-radius:99px; position:relative; background:#070c18; border:1px solid #34425e;
+    box-shadow:inset 0 3px 8px #0009; overflow:hidden; }
+  .target { position:absolute; top:0; bottom:0; left:43%; width:14%;
+    background:linear-gradient(90deg,#65f2b277,#65f2b2); border-left:1px solid #baffdf; border-right:1px solid #baffdf;
+    box-shadow:0 0 17px #65f2b277; }
+  .target-core { position:absolute; left:49%; width:2%; top:-3px; bottom:-3px; background:#eafff5; box-shadow:0 0 12px #fff; }
+  .needle { position:absolute; width:4px; height:34px; top:18px; left:0%; border-radius:4px;
+    background:linear-gradient(#fff,var(--cyan)); box-shadow:0 0 13px var(--cyan),0 0 25px #4de6ff77;
+    transform:translateX(-50%); pointer-events:none; }
+  .needle:before { content:""; position:absolute; left:50%; top:-7px; transform:translateX(-50%);
+    border-left:6px solid transparent; border-right:6px solid transparent; border-top:7px solid white; }
+  .edge-labels { display:flex; justify-content:space-between; color:#70809f; font-size:10px; margin-top:10px; }
+  .feedback { height:38px; display:grid; place-items:center; text-align:center; font-weight:800; letter-spacing:.12em;
+    font-size:clamp(17px,4vw,23px); margin:7px 0 4px; color:var(--cyan); text-shadow:0 0 18px currentColor; }
+  .hint { text-align:center; color:var(--muted); font-size:12px; min-height:18px; }
+  .actions { display:flex; justify-content:center; gap:10px; margin-top:22px; flex-wrap:wrap; }
+  button { border:0; border-radius:12px; padding:13px 20px; color:#08101b; font-weight:800; font-size:14px;
+    cursor:pointer; transition:transform .15s,filter .15s,opacity .15s; }
+  button:hover { filter:brightness(1.1); transform:translateY(-1px); }
+  button:active { transform:translateY(1px) scale(.99); }
+  button:focus-visible { outline:3px solid white; outline-offset:3px; }
+  button:disabled { opacity:.45; cursor:not-allowed; transform:none; }
+  .primary { min-width:190px; background:linear-gradient(110deg,var(--cyan),#8cceff); box-shadow:0 8px 25px #4de6ff26; }
+  .secondary { background:#202c46; color:#dce7ff; border:1px solid #354665; }
+  .progress-row { display:flex; justify-content:space-between; color:var(--muted); font-size:11px; margin:20px 2px 8px; }
+  .progress { height:6px; background:#080e1d; border-radius:99px; overflow:hidden; }
+  .progress-fill { height:100%; width:0%; background:linear-gradient(90deg,var(--purple),var(--cyan)); border-radius:99px; transition:width .25s; }
+  .footer { text-align:center; color:#73819d; font-size:11px; margin-top:16px; line-height:1.7; }
+  .overlay { position:fixed; inset:0; display:grid; place-items:center; padding:20px; background:#050916c9; backdrop-filter:blur(8px); z-index:5; }
+  .modal { width:min(420px,100%); background:#121c32; border:1px solid #344665; border-radius:22px; padding:28px; text-align:center;
+    box-shadow:0 25px 90px #000b; }
+  .modal h2 { margin:0 0 8px; font-size:27px; }
+  .modal p { color:var(--muted); line-height:1.6; font-size:14px; }
+  .big-score { color:var(--cyan); font-size:48px; font-weight:900; margin:14px 0 3px; text-shadow:0 0 25px #4de6ff55; }
+  .modal-actions { display:flex; gap:9px; justify-content:center; margin-top:20px; flex-wrap:wrap; }
+  .hidden { display:none !important; }
+  @media(max-width:520px) {
+    body { padding:12px; }
+    header { margin-bottom:12px; }
+    .stats { gap:6px; }
+    .stat { padding:9px 4px; }
+    .stat strong { font-size:18px; }
+    .stat span { font-size:9px; }
+    .arena { padding:17px 12px 14px; }
+    .primary { width:100%; }
+    .secondary { flex:1; }
+  }
+  @media(prefers-reduced-motion:reduce) { *,*::before,*::after { transition:none !important; } }
+</style>
 </head>
 <body>
-  <header class="wrap nav">
-    <a class="brand" href="./" aria-label="RILUZO home"><span class="mark">R</span> RILUZO</a>
-    <nav class="navlinks" aria-label="Main navigation"><a href="#games">Games</a><a href="#about">About</a></nav>
+<main class="shell">
+  <header>
+    <div class="brand">
+      <div class="logo">◎</div>
+      <div><h1>PERFECT TIMING</h1><div class="subbrand">Reflex arcade</div></div>
+    </div>
+    <div class="top-best">PERSONAL BEST<strong id="bestTop">0</strong></div>
   </header>
-  <main>
-    <section class="wrap hero" id="about">
-      <div class="eyebrow"><span class="dot"></span> The game library is open</div>
-      <h1>PLAY BEYOND<br><span>LIMITS.</span></h1>
-      <p>Quick to play. Fun to master. Discover a growing collection of free browser games made for curious minds and competitive spirits.</p>
-      <a class="cta" href="#games">EXPLORE GAMES <span>↘</span></a>
-    </section>
-    <section class="wrap" id="games">
-      <div class="section-head"><div><h2>Explore the library</h2><p>Pick a game and jump straight into the action.</p></div><div class="count">01 GAME AVAILABLE</div></div>
-      <div class="games">
-        <a class="card" href="games/perfect-timing/" aria-label="Play Perfect Timing">
-          <div class="cover"><div class="target"></div></div>
-          <div class="cardbody">
-            <div class="tags"><span class="tag">ARCADE</span><span class="tag">REFLEX</span><span class="tag">1 PLAYER</span></div>
-            <h3>Perfect Timing</h3>
-            <p>Stop the moving marker inside the target zone. Can you keep your focus through all 10 rounds?</p>
-            <div class="play"><span>PLAY NOW</span><span>→</span></div>
-          </div>
-        </a>
-        <div class="card coming">
-          <div class="cover"><div class="soon">✦</div></div>
-          <div class="cardbody">
-            <div class="tags"><span class="tag">COMING SOON</span></div>
-            <h3>More games are on the way</h3>
-            <p>New arcade, puzzle, and skill games will join the RILUZO library.</p>
-            <div class="play"><span>STAY TUNED</span><span>✦</span></div>
-          </div>
-        </div>
+
+  <section class="panel">
+    <div class="stats">
+      <div class="stat"><span>Score</span><strong id="score">0</strong></div>
+      <div class="stat"><span>Level</span><strong id="level">1/10</strong></div>
+      <div class="stat"><span>Combo</span><strong id="combo">×0</strong></div>
+      <div class="stat"><span>Best</span><strong id="best">0</strong></div>
+    </div>
+
+    <div class="arena">
+      <div class="arena-head">
+        <div class="level-label">Target zone <b id="zoneSize">14%</b></div>
+        <div class="status" id="status">READY</div>
       </div>
-    </section>
-  </main>
-  <footer class="wrap footer"><div><strong>RILUZO</strong> — PLAY BEYOND LIMITS.</div><div>© <span id="year"></span> RILUZO. Built for play.</div></footer>
-  <script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+      <div class="track-wrap" aria-label="Moving pointer timing track">
+        <div class="track">
+          <div class="target" id="target"></div>
+          <div class="target-core"></div>
+        </div>
+        <div class="needle" id="needle"></div>
+        <div class="edge-labels"><span>0%</span><span>STOP IN THE GLOW</span><span>100%</span></div>
+      </div>
+      <div class="feedback" id="feedback">READY?</div>
+      <div class="hint" id="hint">Press start, then stop the pointer inside the target.</div>
+    </div>
+
+    <div class="progress-row"><span>LEVEL PROGRESS</span><span id="progressText">0 / 10</span></div>
+    <div class="progress"><div class="progress-fill" id="progressFill"></div></div>
+
+    <div class="actions">
+      <button class="primary" id="mainBtn">START GAME</button>
+      <button class="secondary" id="pauseBtn" disabled>PAUSE</button>
+      <button class="secondary" id="soundBtn" aria-pressed="true">SOUND: ON</button>
+    </div>
+  </section>
+  <div class="footer">SPACE or CLICK to stop · P to pause · 10 rounds to win<br>Your best score is saved on this device.</div>
+</main>
+
+<div class="overlay" id="overlay">
+  <div class="modal" id="welcomeModal">
+    <div class="logo" style="margin:0 auto 16px">◎</div>
+    <h2>Trust your timing.</h2>
+    <p>Stop the glowing pointer inside the target zone. The closer you get to the center, the more points you earn. Each round gets faster and trickier.</p>
+    <p><b style="color:#65f2b2">PERFECT</b> = 100 points &nbsp; <b style="color:#4de6ff">GREAT</b> = 60 points</p>
+    <div class="modal-actions"><button class="primary" id="welcomeStart">LET'S PLAY</button></div>
+  </div>
+  <div class="modal hidden" id="endModal">
+    <h2 id="endTitle">Run complete!</h2>
+    <p id="endMessage">Great effort.</p>
+    <div class="big-score" id="finalScore">0</div>
+    <div style="color:#9ba8c4;font-size:12px">FINAL SCORE</div>
+    <div class="modal-actions"><button class="primary" id="againBtn">PLAY AGAIN</button></div>
+  </div>
+  <div class="modal hidden" id="pauseModal">
+    <h2>Paused</h2><p>Take a moment. Your run is waiting.</p>
+    <div class="modal-actions"><button class="primary" id="resumeBtn">RESUME</button></div>
+  </div>
+</div>
+
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  const TOTAL = 10;
+  const state = {
+    running:false, paused:false, ended:false, level:1, score:0, combo:0,
+    pos:0, direction:1, lastTime:0, raf:0, sound:true, audio:null,
+    best:Number(localStorage.getItem('perfectTimingBest') || 0),
+    zoneStart:43, zoneWidth:14, speed:48, attempts:0
+  };
+
+  const ui = {
+    score:$('score'), level:$('level'), combo:$('combo'), best:$('best'),
+    bestTop:$('bestTop'), zone:$('target'), zoneSize:$('zoneSize'),
+    needle:$('needle'), feedback:$('feedback'), hint:$('hint'),
+    status:$('status'), progress:$('progressFill'), progressText:$('progressText'),
+    main:$('mainBtn'), pause:$('pauseBtn'), sound:$('soundBtn'), overlay:$('overlay')
+  };
+
+  function audioTone(freq=600, duration=.07, type='sine', volume=.035) {
+    if (!state.sound) return;
+    try {
+      state.audio ||= new (window.AudioContext || window.webkitAudioContext)();
+      if (state.audio.state === 'suspended') state.audio.resume();
+      const osc=state.audio.createOscillator(), gain=state.audio.createGain();
+      osc.type=type; osc.frequency.value=freq; gain.gain.value=volume;
+      gain.gain.exponentialRampToValueAtTime(.001,state.audio.currentTime+duration);
+      osc.connect(gain); gain.connect(state.audio.destination);
+      osc.start(); osc.stop(state.audio.currentTime+duration);
+    } catch(e) {}
+  }
+
+  function updateStats() {
+    ui.score.textContent=state.score.toLocaleString();
+    ui.level.textContent=`${Math.min(state.level,TOTAL)}/${TOTAL}`;
+    ui.combo.textContent=`×${state.combo}`;
+    ui.best.textContent=state.best.toLocaleString();
+    ui.bestTop.textContent=state.best.toLocaleString();
+    ui.progress.style.width=`${(state.level-1)/TOTAL*100}%`;
+    ui.progressText.textContent=`${state.level-1} / ${TOTAL}`;
+  }
+
+  function setupLevel() {
+    state.zoneWidth=Math.max(4.5,14-(state.level-1)*1.05);
+    state.zoneStart=43;
+    state.speed=48+(state.level-1)*10;
+    state.pos=0;
+    state.direction=1;
+    ui.zone.style.left=state.zoneStart+'%';
+    ui.zone.style.width=state.zoneWidth+'%';
+    ui.zoneSize.textContent=state.zoneWidth.toFixed(1)+'%';
+    ui.needle.style.left='0%';
+    ui.status.textContent='ROUND '+state.level;
+    ui.feedback.textContent='READY?';
+    ui.feedback.style.color='var(--cyan)';
+    ui.hint.textContent='Stop the pointer while it is inside the glowing zone.';
+    updateStats();
+  }
+
+  function animate(time) {
+    if (!state.running || state.paused) return;
+    const dt=Math.min((time-state.lastTime)/1000,.04);
+    state.lastTime=time;
+    state.pos += state.direction*state.speed*dt;
+    if (state.pos>=100) { state.pos=100; state.direction=-1; }
+    if (state.pos<=0) { state.pos=0; state.direction=1; }
+    ui.needle.style.left=state.pos+'%';
+    state.raf=requestAnimationFrame(animate);
+  }
+
+  function startRun() {
+    cancelAnimationFrame(state.raf);
+    state.running=true; state.paused=false; state.ended=false;
+    state.level=1; state.score=0; state.combo=0; state.attempts=0;
+    setupLevel();
+    ui.overlay.classList.add('hidden');
+    ui.pause.disabled=false; ui.pause.textContent='PAUSE';
+    ui.main.textContent='STOP POINTER';
+    ui.status.textContent='MOVING';
+    ui.feedback.textContent='FOCUS…';
+    ui.hint.textContent='Press SPACE or tap STOP when the pointer enters the zone.';
+    state.lastTime=performance.now();
+    state.raf=requestAnimationFrame(animate);
+    audioTone(520,.1);
+  }
+
+  function stopPointer() {
+    if (!state.running || state.paused || state.ended) return;
+    cancelAnimationFrame(state.raf);
+    state.running=false;
+    const center=state.zoneStart+state.zoneWidth/2;
+    const distance=Math.abs(state.pos-center);
+    const inside=state.pos>=state.zoneStart && state.pos<=state.zoneStart+state.zoneWidth;
+    let label, points, color;
+    if (inside && distance<=state.zoneWidth*.16) {
+      label='PERFECT!'; points=100; color='var(--green)'; state.combo++; audioTone(880,.13);
+    } else if (inside && distance<=state.zoneWidth*.34) {
+      label='GREAT!'; points=60; color='var(--cyan)'; state.combo++; audioTone(700,.11);
+    } else if (inside) {
+      label='GOOD!'; points=30; color='var(--yellow)'; state.combo++; audioTone(540,.1);
+    } else {
+      label='MISS!'; points=0; color='var(--red)'; state.combo=0; audioTone(180,.18,'triangle');
+    }
+    const comboBonus=points ? Math.min((state.combo-1)*5,45) : 0;
+    const earned=points+comboBonus;
+    state.score+=earned; state.attempts++;
+    ui.feedback.textContent=label;
+    ui.feedback.style.color=color;
+    ui.status.textContent=points?'+'+earned+' POINTS':'TRY AGAIN';
+    ui.hint.textContent=points
+      ? `${points} base points${comboBonus ? ` + ${comboBonus} combo bonus` : ''}.`
+      : 'Outside the target. Your combo reset.';
+    ui.main.textContent=state.level===TOTAL?'FINISH RUN':'NEXT ROUND';
+    ui.main.disabled=false;
+    updateStats();
+    if (state.score>state.best) {
+      state.best=state.score;
+      localStorage.setItem('perfectTimingBest',String(state.best));
+      updateStats();
+    }
+    if (state.level===TOTAL) {
+      state.ended=true;
+      ui.main.textContent='VIEW RESULTS';
+    }
+  }
+
+  function nextRound() {
+    if (state.ended) { finishRun(); return; }
+    if (state.running) { stopPointer(); return; }
+    if (state.level===TOTAL) { finishRun(); return; }
+    state.level++;
+    state.running=true;
+    setupLevel();
+    ui.main.textContent='STOP POINTER';
+    ui.status.textContent='MOVING';
+    ui.feedback.textContent='FOCUS…';
+    ui.hint.textContent='Press SPACE or tap STOP when the pointer enters the zone.';
+    state.lastTime=performance.now();
+    state.raf=requestAnimationFrame(animate);
+  }
+
+  function finishRun() {
+    state.running=false; state.ended=true; cancelAnimationFrame(state.raf);
+    ui.progress.style.width='100%'; ui.progressText.textContent='10 / 10';
+    $('endTitle').textContent='Run complete!';
+    $('endMessage').textContent=state.score>=800?'Outstanding timing. You crushed it!':state.score>=500?'Nice work! Your reflexes are improving.':'Good practice. Every run makes you sharper.';
+    $('finalScore').textContent=state.score.toLocaleString();
+    $('welcomeModal').classList.add('hidden');
+    $('pauseModal').classList.add('hidden');
+    $('endModal').classList.remove('hidden');
+    ui.overlay.classList.remove('hidden');
+    ui.pause.disabled=true;
+    ui.main.textContent='PLAY AGAIN';
+    audioTone(740,.12); setTimeout(()=>audioTone(990,.16),130);
+  }
+
+  function pauseGame() {
+    if (!state.running || state.paused) return;
+    state.paused=true; cancelAnimationFrame(state.raf);
+    $('welcomeModal').classList.add('hidden'); $('endModal').classList.add('hidden');
+    $('pauseModal').classList.remove('hidden'); ui.overlay.classList.remove('hidden');
+    ui.pause.textContent='RESUME';
+  }
+  function resumeGame() {
+    if (!state.paused) return;
+    state.paused=false; ui.overlay.classList.add('hidden');
+    ui.pause.textContent='PAUSE'; state.lastTime=performance.now();
+    state.raf=requestAnimationFrame(animate);
+  }
+
+  ui.main.addEventListener('click', () => {
+    if (state.running) stopPointer();
+    else if (state.ended) finishRun();
+    else if (state.level>1 || state.attempts>0) nextRound();
+    else startRun();
+  });
+  $('welcomeStart').addEventListener('click',startRun);
+  $('againBtn').addEventListener('click',startRun);
+  ui.pause.addEventListener('click',()=>state.paused?resumeGame():pauseGame());
+  $('resumeBtn').addEventListener('click',resumeGame);
+  ui.sound.addEventListener('click',()=>{
+    state.sound=!state.sound;
+    ui.sound.textContent='SOUND: '+(state.sound?'ON':'OFF');
+    ui.sound.setAttribute('aria-pressed',String(state.sound));
+    if(state.sound) audioTone(650,.08);
+  });
+  document.addEventListener('keydown',e=>{
+    if(e.code==='Space') {
+      e.preventDefault();
+      if(!ui.overlay.classList.contains('hidden')) return;
+      if(state.running) stopPointer();
+      else if(!state.ended) nextRound();
+    }
+    if(e.key.toLowerCase()==='p') {
+      if(!ui.overlay.classList.contains('hidden') && state.paused) resumeGame();
+      else pauseGame();
+    }
+  });
+  updateStats();
+})();
+</script>
 </body>
 </html>
