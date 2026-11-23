@@ -2,88 +2,214 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#101321">
-<title>RILUZO - Play Free Online Games</title>
-<meta name="description" content="Discover free arcade, puzzle and brain games at RILUZO. Play instantly in your browser.">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#101321">
+    <title>RILUZO - Play Free Browser Games</title>
+    <meta name="description" content="Discover and play fun browser games on RILUZO.">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<style>
-*{box-sizing:border-box}
-body{margin:0;background:#101321;color:white;font-family:Arial,sans-serif}
-header{padding:22px 7%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #292d40}
-.logo{font-size:28px;font-weight:900;color:#72f5bd;letter-spacing:3px}
-header a{color:#72f5bd;text-decoration:none}
-.hero{text-align:center;padding:85px 20px 65px}
-.hero h1{font-size:clamp(40px,7vw,68px);margin:0 0 15px}
-.hero h1 span{color:#72f5bd}
-.hero p{color:#a6abc0;font-size:17px;line-height:1.6}
-.section{max-width:1100px;margin:auto;padding:25px 20px 70px}
-.section h2{font-size:30px;margin-bottom:25px}
-.games{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px}
-.card{background:#1b2032;border:1px solid #30364c;border-radius:15px;padding:25px;transition:.2s}
-.card:hover{transform:translateY(-5px);border-color:#72f5bd}
-.number{font-size:13px;color:#72f5bd;letter-spacing:2px}
-.card h3{font-size:23px;margin:15px 0 10px}
-.card p{color:#a6abc0;line-height:1.6;min-height:48px}
-.play{display:inline-block;background:#72f5bd;color:#101321;padding:12px 20px;border-radius:8px;text-decoration:none;font-weight:bold;margin-top:12px}
-footer{text-align:center;padding:30px;color:#747c96;border-top:1px solid #292d40}
-</style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #101321;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            padding: 22px 7%;
+            border-bottom: 1px solid #292d40;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            color: #72f5bd;
+            text-decoration: none;
+        }
+
+        .tagline {
+            color: #a6abc0;
+            font-size: 14px;
+        }
+
+        main {
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 55px 20px;
+            flex: 1;
+        }
+
+        .intro {
+            text-align: center;
+            margin-bottom: 55px;
+        }
+
+        .intro h1 {
+            font-size: clamp(38px, 7vw, 55px);
+            margin-bottom: 15px;
+        }
+
+        .intro p {
+            color: #a6abc0;
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        h2 {
+            font-size: 27px;
+            margin-bottom: 25px;
+        }
+
+        .games {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 18px;
+        }
+
+        .game-card {
+            background: #1b2032;
+            padding: 25px;
+            border: 1px solid #30364c;
+            border-radius: 14px;
+            transition: 0.2s;
+        }
+
+        .game-card:hover {
+            border-color: #72f5bd;
+            transform: translateY(-3px);
+        }
+
+        .game-number {
+            color: #72f5bd;
+            font-size: 12px;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .game-card h3 {
+            font-size: 21px;
+            margin-bottom: 12px;
+        }
+
+        .game-card p {
+            color: #a6abc0;
+            font-size: 14px;
+            line-height: 1.6;
+            min-height: 45px;
+        }
+
+        .game-card a {
+            display: inline-block;
+            margin-top: 20px;
+            background: #72f5bd;
+            color: #101321;
+            padding: 12px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .game-card a:hover {
+            background: #9affd0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: #747c96;
+            font-size: 13px;
+            border-top: 1px solid #292d40;
+        }
+
+        @media (max-width: 500px) {
+            main {
+                padding: 40px 15px;
+            }
+
+            .games {
+                grid-template-columns: 1fr;
+            }
+
+            header {
+                padding: 20px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
 <header>
-<div class="logo">RILUZO</div>
-<a href="#games">Explore Games ↓</a>
+    <a href="./" class="logo">RILUZO</a>
+    <span class="tagline">Discover. Play. Enjoy.</span>
 </header>
 
-<section class="hero">
-<h1>Discover. <span>Play.</span> Enjoy.</h1>
-<p>
-A collection of fun, interactive browser games.<br>
-No downloads. Just play.
-</p>
-</section>
+<main>
 
-<section class="section" id="games">
-<h2>Explore Our Games</h2>
+    <section class="intro">
+        <h1>Welcome to RILUZO</h1>
+        <p>
+            Discover fun, challenging and addictive browser games.<br>
+            Pick a game and start playing!
+        </p>
+    </section>
 
-<div class="games">
+    <section>
+        <h2>Our Games</h2>
 
-<div class="card">
-<div class="number">01 / ARCADE</div>
-<h3>Perfect Timing</h3>
-<p>Test your reflexes. Stop the moving marker at the perfect moment.</p>
-<a class="play" href="games/perfect-timing/">Play Now →</a>
-</div>
+        <div class="games">
 
-<div class="card">
-<div class="number">02 / ARCADE</div>
-<h3>Snake Evolution</h3>
-<p>Collect food, grow your snake and survive as long as possible.</p>
-<a class="play" href="games/snake-evolution/">Play Now →</a>
-</div>
+            <div class="game-card">
+                <div class="game-number">01 / ARCADE</div>
+                <h3>Perfect Timing</h3>
+                <p>Test your reflexes and stop the moving marker at the perfect moment.</p>
+                <a href="games/perfect-timing/">Play Now →</a>
+            </div>
 
-<div class="card">
-<div class="number">03 / PUZZLE</div>
-<h3>Number Merge</h3>
-<p>Combine matching numbers and challenge yourself to reach 2048.</p>
-<a class="play" href="games/number-merge/">Play Now →</a>
-</div>
+            <div class="game-card">
+                <div class="game-number">02 / ARCADE</div>
+                <h3>Snake Evolution</h3>
+                <p>Collect food, grow your snake and survive as long as possible.</p>
+                <a href="games/snake-evolution/">Play Now →</a>
+            </div>
 
-<div class="card">
-<div class="number">04 / BRAIN</div>
-<h3>Color Confusion</h3>
-<p>Challenge your observation skills and identify colors under pressure.</p>
-<a class="play" href="games/color-confusion/">Play Now →</a>
-</div>
+            <div class="game-card">
+                <div class="game-number">03 / PUZZLE</div>
+                <h3>Number Merge</h3>
+                <p>Combine matching numbers and challenge yourself to reach 2048.</p>
+                <a href="games/number-merge/">Play Now →</a>
+            </div>
 
-</div>
-</section>
+            <div class="game-card">
+                <div class="game-number">04 / BRAIN</div>
+                <h3>Color Confusion</h3>
+                <p>Test your observation skills and identify the actual color of the text.</p>
+                <a href="games/color-confusion/">Play Now →</a>
+            </div>
+
+        </div>
+    </section>
+
+</main>
 
 <footer>
-<p>© 2026 RILUZO. Discover. Play. Enjoy.</p>
+    <p>© 2026 RILUZO. All rights reserved.</p>
 </footer>
 
 </body>
