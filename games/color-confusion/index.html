@@ -1,0 +1,165 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Color Confusion | RILUZO</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#101321;color:white;font-family:Arial;text-align:center}
+header{padding:20px;display:flex;justify-content:space-between;border-bottom:1px solid #30364c}
+a{color:#72f5bd;text-decoration:none}
+main{max-width:550px;margin:45px auto;padding:15px}
+h1{font-size:42px}
+p{color:#a6abc0;line-height:1.6}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:25px 0}
+.stat{background:#1b2032;padding:15px;border-radius:10px}
+.stat strong{display:block;color:#72f5bd;font-size:24px;margin-top:7px}
+#word{font-size:clamp(45px,12vw,75px);font-weight:900;margin:45px 0}
+.answers{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+button{border:0;padding:17px;border-radius:10px;font-weight:bold;font-size:17px;cursor:pointer}
+.answer{background:#292f44;color:white;border:1px solid #414961}
+.answer:hover{background:#414961}
+#start{background:#72f5bd;color:#101321;width:100%;margin-top:20px}
+#status{min-height:25px;margin:20px}
+button:disabled{opacity:.5;cursor:not-allowed}
+</style>
+</head>
+<body>
+<header>
+<a href="../../">RILUZO</a>
+<a href="../../">← All Games</a>
+</header>
+
+<main>
+<h1>Color Confusion</h1>
+<p>Look at the color of the letters, not the word itself!</p>
+
+<div class="stats">
+<div class="stat">SCORE<strong id="score">0</strong></div>
+<div class="stat">TIME<strong id="time">30</strong></div>
+<div class="stat">BEST<strong id="best">0</strong></div>
+</div>
+
+<div id="word">READY?</div>
+
+<div class="answers" id="answers"></div>
+
+<p id="status">You have 30 seconds. How many can you get right?</p>
+<button id="start">START CHALLENGE</button>
+</main>
+
+<script>
+const colors=[
+ {name:"RED",hex:"#ff4d6d"},
+ {name:"BLUE",hex:"#4da6ff"},
+ {name:"GREEN",hex:"#72f5bd"},
+ {name:"YELLOW",hex:"#ffd166"},
+ {name:"PURPLE",hex:"#c084fc"},
+ {name:"ORANGE",hex:"#ff9f43"}
+];
+
+const wordEl=document.getElementById("word");
+const answersEl=document.getElementById("answers");
+const scoreEl=document.getElementById("score");
+const timeEl=document.getElementById("time");
+const bestEl=document.getElementById("best");
+const statusEl=document.getElementById("status");
+const startBtn=document.getElementById("start");
+
+let score=0;
+let time=30;
+let timer=null;
+let playing=false;
+let correctColor=null;
+let best=Number(localStorage.getItem("colorBest")||0);
+
+bestEl.textContent=best;
+
+function shuffle(array){
+ return [...array].sort(()=>Math.random()-.5);
+}
+
+function nextQuestion(){
+ const wordColor=colors[Math.floor(Math.random()*colors.length)];
+
+ const available=colors.filter(c=>c!==wordColor);
+ correctColor=available[Math.floor(Math.random()*available.length)];
+
+ wordEl.textContent=wordColor.name;
+ wordEl.style.color=correctColor.hex;
+
+ answersEl.innerHTML="";
+
+ shuffle(colors).forEach(color=>{
+  const button=document.createElement("button");
+  button.className="answer";
+  button.textContent=color.name;
+  button.addEventListener("click",()=>answer(color.name));
+  answersEl.appendChild(button);
+ });
+}
+
+function answer(choice){
+ if(!playing)return;
+
+ if(choice===correctColor.name){
+  score+=10;
+  statusEl.textContent="Correct! +10 points";
+ }else{
+  score=Math.max(0,score-5);
+  statusEl.textContent="Not quite! Try the next one.";
+ }
+
+ scoreEl.textContent=score;
+ nextQuestion();
+}
+
+function startGame(){
+ clearInterval(timer);
+
+ score=0;
+ time=30;
+ playing=true;
+
+ scoreEl.textContent=score;
+ timeEl.textContent=time;
+ statusEl.textContent="Choose the color of the text!";
+
+ startBtn.disabled=true;
+ startBtn.textContent="CHALLENGE IN PROGRESS";
+
+ nextQuestion();
+
+ timer=setInterval(()=>{
+  time--;
+  timeEl.textContent=time;
+
+  if(time<=0)endGame();
+ },1000);
+}
+
+function endGame(){
+ clearInterval(timer);
+ playing=false;
+
+ if(score>best){
+  best=score;
+  localStorage.setItem("colorBest",best);
+  bestEl.textContent=best;
+ }
+
+ wordEl.textContent="TIME UP!";
+ wordEl.style.color="#72f5bd";
+ answersEl.innerHTML="";
+
+ statusEl.textContent="Your final score: "+score+" points!";
+ startBtn.disabled=false;
+ startBtn.textContent="PLAY AGAIN";
+}
+
+startBtn.addEventListener("click",startGame);
+</script>
+</body>
+</html>
