@@ -1,0 +1,242 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Number Merge | RILUZO</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#101321;color:white;font-family:Arial;text-align:center}
+header{padding:20px;display:flex;justify-content:space-between;border-bottom:1px solid #30364c}
+a{color:#72f5bd;text-decoration:none}
+main{max-width:440px;margin:35px auto;padding:15px}
+h1{font-size:40px}
+p{color:#a6abc0}
+.stats{display:flex;justify-content:space-around;background:#1b2032;padding:15px;border-radius:10px;margin:20px 0}
+#board{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;background:#30364c;padding:8px;border-radius:12px;touch-action:none}
+.tile{aspect-ratio:1;background:#444b61;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:clamp(19px,5vw,29px);font-weight:bold;color:white}
+.v2{background:#eee4da;color:#554b40}
+.v4{background:#ede0c8;color:#554b40}
+.v8{background:#f2b179}
+.v16{background:#f59563}
+.v32{background:#f67c5f}
+.v64{background:#f65e3b}
+.v128{background:#edcf72}
+.v256{background:#edcc61}
+.v512{background:#edc850}
+.v1024{background:#edc53f}
+.v2048{background:#edc22e;color:#222}
+button{border:0;background:#72f5bd;color:#101321;padding:13px 20px;border-radius:9px;font-weight:bold;cursor:pointer;margin:8px}
+.controls{margin-top:12px}
+.controls button{width:65px;height:45px}
+</style>
+</head>
+<body>
+<header>
+<a href="../../">RILUZO</a>
+<a href="../../">← All Games</a>
+</header>
+
+<main>
+<h1>Number Merge</h1>
+<p>Combine matching numbers. Reach 2048!</p>
+
+<div class="stats">
+<div>Score: <strong id="score">0</strong></div>
+<div>Best: <strong id="best">0</strong></div>
+</div>
+
+<div id="board"></div>
+
+<p id="status">Use arrow keys to merge numbers.</p>
+<button id="restart">NEW GAME</button>
+
+<div class="controls">
+<div><button data-move="up">▲</button></div>
+<div>
+<button data-move="left">◀</button>
+<button data-move="down">▼</button>
+<button data-move="right">▶</button>
+</div>
+</div>
+</main>
+
+<script>
+const boardEl=document.getElementById("board");
+const scoreEl=document.getElementById("score");
+const bestEl=document.getElementById("best");
+const statusEl=document.getElementById("status");
+
+let board=[];
+let score=0;
+let best=Number(localStorage.getItem("mergeBest")||0);
+let over=false;
+let won=false;
+
+bestEl.textContent=best;
+
+function emptyBoard(){
+ return Array.from({length:4},()=>Array(4).fill(0));
+}
+
+function addTile(){
+ const empty=[];
+ board.forEach((row,r)=>row.forEach((v,c)=>{
+  if(!v)empty.push([r,c]);
+ }));
+ if(!empty.length)return false;
+
+ const [r,c]=empty[Math.floor(Math.random()*empty.length)];
+ board[r][c]=Math.random()<0.9?2:4;
+ return true;
+}
+
+function render(){
+ boardEl.innerHTML="";
+ board.forEach(row=>row.forEach(v=>{
+  const tile=document.createElement("div");
+  tile.className="tile"+(v?" v"+v:"");
+  tile.textContent=v||"";
+  boardEl.appendChild(tile);
+ }));
+ scoreEl.textContent=score;
+ bestEl.textContent=best;
+}
+
+function slide(line){
+ let arr=line.filter(v=>v);
+ let result=[];
+ let gained=0;
+
+ for(let i=0;i<arr.length;i++){
+  if(arr[i]===arr[i+1]){
+   const value=arr[i]*2;
+   result.push(value);
+   gained+=value;
+   i++;
+  }else{
+   result.push(arr[i]);
+  }
+ }
+
+ while(result.length<4)result.push(0);
+ return {line:result, gained};
+}
+
+function move(direction){
+ if(over)return;
+
+ const old=JSON.stringify(board);
+ let gained=0;
+
+ for(let i=0;i<4;i++){
+  let line=[];
+
+  if(direction==="left"||direction==="right"){
+   line=[...board[i]];
+  }else{
+   for(let r=0;r<4;r++)line.push(board[r][i]);
+  }
+
+  if(direction==="right"||direction==="down")line.reverse();
+
+  const result=slide(line);
+  gained+=result.gained;
+  line=result.line;
+
+  if(direction==="right"||direction==="down")line.reverse();
+
+  for(let j=0;j<4;j++){
+   if(direction==="left"||direction==="right"){
+    board[i][j]=line[j];
+   }else{
+    board[j][i]=line[j];
+   }
+  }
+ }
+
+ if(old===JSON.stringify(board))return;
+
+ score+=gained;
+
+ if(score>best){
+  best=score;
+  localStorage.setItem("mergeBest",best);
+ }
+
+ if(!won&&board.some(row=>row.includes(2048))){
+  won=true;
+  statusEl.textContent="Amazing! You reached 2048!";
+ }else{
+  statusEl.textContent="Keep merging!";
+ }
+
+ addTile();
+ render();
+ checkGameOver();
+}
+
+function checkGameOver(){
+ for(let r=0;r<4;r++){
+  for(let c=0;c<4;c++){
+   if(board[r][c]===0)return;
+   if(c<3&&board[r][c]===board[r][c+1])return;
+   if(r<3&&board[r][c]===board[r+1][c])return;
+  }
+ }
+ over=true;
+ statusEl.textContent="No more moves! Start a new game.";
+}
+
+function newGame(){
+ board=emptyBoard();
+ score=0;
+ over=false;
+ won=false;
+ statusEl.textContent="Use arrow keys to merge numbers.";
+ addTile();
+ addTile();
+ render();
+}
+
+document.addEventListener("keydown",e=>{
+ const keys={
+  ArrowLeft:"left",
+  ArrowRight:"right",
+  ArrowUp:"up",
+  ArrowDown:"down"
+ };
+ if(keys[e.key]){
+  e.preventDefault();
+  move(keys[e.key]);
+ }
+});
+
+document.querySelectorAll("[data-move]").forEach(btn=>{
+ btn.addEventListener("click",()=>move(btn.dataset.move));
+});
+
+document.getElementById("restart").addEventListener("click",newGame);
+
+let touchStart=null;
+boardEl.addEventListener("touchstart",e=>{
+ touchStart={x:e.touches[0].clientX,y:e.touches[0].clientY};
+},{passive:true});
+
+boardEl.addEventListener("touchend",e=>{
+ if(!touchStart)return;
+ const dx=e.changedTouches[0].clientX-touchStart.x;
+ const dy=e.changedTouches[0].clientY-touchStart.y;
+ if(Math.max(Math.abs(dx),Math.abs(dy))<25)return;
+
+ move(Math.abs(dx)>Math.abs(dy)
+  ?(dx>0?"right":"left")
+  :(dy>0?"down":"up"));
+ touchStart=null;
+},{passive:true});
+
+newGame();
+</script>
+</body>
+</html>
