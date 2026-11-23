@@ -2,18 +2,566 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfect Timing - RILUZO</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101321">
+<title>Perfect Timing | RILUZO</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #101321;
+    color: #ffffff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    padding: 22px 7%;
+    border-bottom: 1px solid #292d40;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    color: #72f5bd;
+    text-decoration: none;
+}
+
+.back-link {
+    color: #b7bdd0;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+main {
+    width: 100%;
+    max-width: 750px;
+    margin: auto;
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.tag {
+    color: #72f5bd;
+    font-size: 12px;
+    letter-spacing: 3px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+h1 {
+    font-size: clamp(35px, 7vw, 55px);
+    margin-bottom: 12px;
+}
+
+.subtitle {
+    color: #a6abc0;
+    margin-bottom: 35px;
+    line-height: 1.6;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 35px;
+}
+
+.stat {
+    background: #1b2032;
+    padding: 18px 10px;
+    border: 1px solid #30364c;
+    border-radius: 12px;
+}
+
+.stat span {
+    display: block;
+    color: #929bb5;
+    font-size: 12px;
+    margin-bottom: 9px;
+}
+
+.stat strong {
+    font-size: 25px;
+    color: #72f5bd;
+}
+
+.game-box {
+    background: #1b2032;
+    padding: 30px 22px;
+    border: 1px solid #30364c;
+    border-radius: 18px;
+}
+
+.status {
+    color: #c0c5d8;
+    margin-bottom: 25px;
+    min-height: 22px;
+}
+
+.track {
+    position: relative;
+    width: 100%;
+    height: 28px;
+    background: #343a50;
+    border-radius: 30px;
+    margin: 35px 0;
+    overflow: hidden;
+}
+
+.target-zone {
+    position: absolute;
+    height: 100%;
+    width: 14%;
+    left: 43%;
+    background: rgba(114, 245, 189, 0.25);
+    border-left: 2px solid #72f5bd;
+    border-right: 2px solid #72f5bd;
+}
+
+.marker {
+    position: absolute;
+    height: 38px;
+    width: 9px;
+    background: #ffffff;
+    top: -5px;
+    left: 0;
+    border-radius: 5px;
+    box-shadow: 0 0 12px #ffffff;
+}
+
+button {
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    border-radius: 10px;
+    transition: 0.2s;
+}
+
+.play-btn {
+    width: 100%;
+    padding: 17px;
+    background: #72f5bd;
+    color: #101321;
+    margin-top: 15px;
+}
+
+.play-btn:hover {
+    background: #9affd0;
+    transform: translateY(-2px);
+}
+
+.play-btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.difficulty {
+    margin-top: 25px;
+}
+
+.difficulty label {
+    color: #a6abc0;
+    font-size: 13px;
+}
+
+select {
+    display: block;
+    margin: 10px auto;
+    background: #292f44;
+    color: white;
+    border: 1px solid #414961;
+    padding: 10px 18px;
+    border-radius: 8px;
+}
+
+.result {
+    display: none;
+    margin-top: 25px;
+    padding: 20px;
+    border-radius: 12px;
+    background: #292f44;
+}
+
+.result h2 {
+    color: #72f5bd;
+    margin-bottom: 12px;
+}
+
+.result p {
+    color: #c0c5d8;
+    line-height: 1.8;
+}
+
+footer {
+    text-align: center;
+    padding: 25px;
+    color: #747c96;
+    font-size: 13px;
+    border-top: 1px solid #292d40;
+}
+
+@media (max-width: 500px) {
+    main {
+        padding: 35px 15px;
+    }
+
+    .game-box {
+        padding: 25px 15px;
+    }
+
+    .stat {
+        padding: 14px 5px;
+    }
+}
+</style>
 </head>
+
 <body>
+
+<header>
+    <a href="../../" class="logo">RILUZO</a>
+    <a href="../../" class="back-link">← All Games</a>
+</header>
+
+<main>
+
+    <div class="tag">RILUZO ORIGINAL GAME</div>
+
     <h1>Perfect Timing</h1>
-    <p>Welcome to your first RILUZO game!</p>
 
-    <button onclick="alert('Your game is working!')">
-        Start Game
-    </button>
+    <p class="subtitle">
+        Stop the moving marker as close to the center
+        of the target zone as possible.
+    </p>
 
-    <p><a href="../../">Back to RILUZO</a></p>
+    <div class="stats">
+
+        <div class="stat">
+            <span>SCORE</span>
+            <strong id="score">0</strong>
+        </div>
+
+        <div class="stat">
+            <span>ROUND</span>
+            <strong id="round">0/5</strong>
+        </div>
+
+        <div class="stat">
+            <span>BEST SCORE</span>
+            <strong id="best">0</strong>
+        </div>
+
+    </div>
+
+    <div class="game-box">
+
+        <p class="status" id="status">
+            Ready? Press Start Game!
+        </p>
+
+        <div class="track" id="track">
+
+            <div class="target-zone" id="targetZone"></div>
+
+            <div class="marker" id="marker"></div>
+
+        </div>
+
+        <button class="play-btn" id="actionBtn">
+            START GAME
+        </button>
+
+        <div class="difficulty">
+
+            <label for="difficulty">SELECT DIFFICULTY</label>
+
+            <select id="difficulty">
+                <option value="1">Easy</option>
+                <option value="2" selected>Medium</option>
+                <option value="3">Hard</option>
+            </select>
+
+        </div>
+
+        <div class="result" id="result">
+
+            <h2 id="resultTitle">Game Complete!</h2>
+
+            <p id="resultText"></p>
+
+            <button class="play-btn" id="restartBtn">
+                PLAY AGAIN
+            </button>
+
+        </div>
+
+    </div>
+
+</main>
+
+<footer>
+    © 2026 RILUZO. Discover. Play. Enjoy.
+</footer>
+
+<script>
+const marker = document.getElementById("marker");
+const track = document.getElementById("track");
+const targetZone = document.getElementById("targetZone");
+
+const actionBtn = document.getElementById("actionBtn");
+const restartBtn = document.getElementById("restartBtn");
+
+const scoreDisplay = document.getElementById("score");
+const roundDisplay = document.getElementById("round");
+const bestDisplay = document.getElementById("best");
+
+const statusText = document.getElementById("status");
+const resultBox = document.getElementById("result");
+const resultTitle = document.getElementById("resultTitle");
+const resultText = document.getElementById("resultText");
+
+const difficulty = document.getElementById("difficulty");
+
+const TOTAL_ROUNDS = 5;
+
+let score = 0;
+let round = 0;
+let best = Number(localStorage.getItem("riluzoBest") || 0);
+
+let position = 0;
+let direction = 1;
+let speed = 2;
+let running = false;
+let animationId = null;
+let roundActive = false;
+let targetWidth = 14;
+let targetCenter = 50;
+let targetTolerance = 7;
+
+bestDisplay.textContent = best;
+
+function getMarkerMax() {
+    return track.clientWidth - marker.offsetWidth;
+}
+
+function updateMarker() {
+    marker.style.left = position + "px";
+}
+
+function startGame() {
+
+    cancelAnimationFrame(animationId);
+
+    score = 0;
+    round = 0;
+
+    scoreDisplay.textContent = score;
+    roundDisplay.textContent = "0/5";
+
+    resultBox.style.display = "none";
+
+    difficulty.disabled = true;
+
+    actionBtn.disabled = false;
+
+    startRound();
+}
+
+function startRound() {
+
+    round++;
+
+    if (round > TOTAL_ROUNDS) {
+        endGame();
+        return;
+    }
+
+    const level = Number(difficulty.value);
+
+    // Difficulty and speed increase with each round.
+    speed = (2 + (level * 1.5)) + ((round - 1) * 0.8);
+
+    // Target zone gets smaller at higher difficulties.
+    targetWidth = Math.max(7, 18 - (level * 3) - ((round - 1) * 1.2));
+
+    targetCenter = 35 + Math.random() * 30;
+
+    targetTolerance = targetWidth / 2;
+
+    targetZone.style.width = targetWidth + "%";
+    targetZone.style.left = (targetCenter - targetTolerance) + "%";
+
+    position = 0;
+    direction = 1;
+
+    roundDisplay.textContent = round + "/5";
+
+    statusText.textContent = "Round " + round + " — Hit the target!";
+
+    actionBtn.textContent = "STOP NOW!";
+    actionBtn.disabled = false;
+
+    running = true;
+    roundActive = true;
+
+    animate();
+}
+
+function animate() {
+
+    if (!running) return;
+
+    position += speed * direction;
+
+    const max = getMarkerMax();
+
+    if (position >= max) {
+        position = max;
+        direction = -1;
+    }
+
+    if (position <= 0) {
+        position = 0;
+        direction = 1;
+    }
+
+    updateMarker();
+
+    animationId = requestAnimationFrame(animate);
+}
+
+function stopGame() {
+
+    if (!running || !roundActive) return;
+
+    running = false;
+    roundActive = false;
+
+    cancelAnimationFrame(animationId);
+
+    const markerCenter =
+        ((position + marker.offsetWidth / 2) / track.clientWidth) * 100;
+
+    const distance = Math.abs(markerCenter - targetCenter);
+
+    // Score is based on distance from target center.
+    const accuracy = Math.max(0, 1 - (distance / 30));
+
+    const points = Math.round(accuracy * 100);
+
+    score += points;
+
+    scoreDisplay.textContent = score;
+
+    let message = "";
+
+    if (distance <= 1.5) {
+        message = "PERFECT! + " + points + " points";
+    } else if (distance <= 5) {
+        message = "Excellent! + " + points + " points";
+    } else if (distance <= 10) {
+        message = "Good try! + " + points + " points";
+    } else {
+        message = "Missed the center! + " + points + " points";
+    }
+
+    statusText.textContent = message;
+
+    actionBtn.textContent = "NEXT ROUND";
+    actionBtn.disabled = true;
+
+    setTimeout(() => {
+
+        if (round < TOTAL_ROUNDS) {
+            startRound();
+        } else {
+            endGame();
+        }
+
+    }, 1200);
+}
+
+function endGame() {
+
+    running = false;
+    roundActive = false;
+
+    cancelAnimationFrame(animationId);
+
+    difficulty.disabled = false;
+
+    actionBtn.disabled = false;
+    actionBtn.textContent = "PLAY AGAIN";
+
+    statusText.textContent = "You completed all five rounds!";
+
+    if (score > best) {
+
+        best = score;
+
+        localStorage.setItem("riluzoBest", best);
+
+        bestDisplay.textContent = best;
+    }
+
+    resultBox.style.display = "block";
+
+    const average = Math.round(score / TOTAL_ROUNDS);
+
+    let title = "Game Complete!";
+
+    if (score >= 450) {
+        title = "Amazing Precision!";
+    } else if (score >= 350) {
+        title = "Excellent Performance!";
+    } else if (score >= 250) {
+        title = "Great Effort!";
+    }
+
+    resultTitle.textContent = title;
+
+    resultText.innerHTML =
+        "Final Score: <strong>" + score + "/500</strong><br>" +
+        "Average Accuracy Score: " + average + "/100<br>" +
+        "Best Score: " + best;
+}
+
+actionBtn.addEventListener("click", () => {
+
+    if (running) {
+        stopGame();
+    } else if (round === 0 || round >= TOTAL_ROUNDS) {
+        startGame();
+    }
+});
+
+restartBtn.addEventListener("click", startGame);
+
+window.addEventListener("resize", () => {
+
+    if (!running) {
+        position = Math.min(position, getMarkerMax());
+        updateMarker();
+    }
+
+});
+
+</script>
+
 </body>
 </html>
