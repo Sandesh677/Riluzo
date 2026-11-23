@@ -1,0 +1,190 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Snake Evolution | RILUZO</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#101321;color:white;font-family:Arial;text-align:center}
+header{padding:20px;border-bottom:1px solid #30364c;display:flex;justify-content:space-between}
+a{color:#72f5bd;text-decoration:none}
+main{max-width:500px;margin:35px auto;padding:15px}
+h1{font-size:38px}
+p{color:#a6abc0}
+.stats{display:flex;justify-content:space-around;margin:20px 0;background:#1b2032;padding:15px;border-radius:12px}
+canvas{width:100%;max-width:400px;background:#090d18;border:2px solid #72f5bd;border-radius:10px;display:block;margin:auto}
+button{background:#72f5bd;color:#101321;border:0;padding:13px 20px;border-radius:9px;font-weight:bold;cursor:pointer;margin:5px}
+.controls{margin-top:15px}
+.controls button{width:65px;height:48px;font-size:20px}
+</style>
+</head>
+<body>
+<header>
+<a href="../../">RILUZO</a>
+<a href="../../">← All Games</a>
+</header>
+
+<main>
+<h1>Snake Evolution</h1>
+<p>Eat. Grow. Survive.</p>
+
+<div class="stats">
+<div>Score: <strong id="score">0</strong></div>
+<div>Best: <strong id="best">0</strong></div>
+</div>
+
+<canvas id="game" width="400" height="400"></canvas>
+
+<p id="status">Press Start to play!</p>
+<button id="start">START GAME</button>
+
+<div class="controls">
+<div><button data-dir="up">▲</button></div>
+<div>
+<button data-dir="left">◀</button>
+<button data-dir="down">▼</button>
+<button data-dir="right">▶</button>
+</div>
+</div>
+<p>Use arrow keys or WASD to move.</p>
+</main>
+
+<script>
+const canvas=document.getElementById("game");
+const ctx=canvas.getContext("2d");
+const scoreEl=document.getElementById("score");
+const bestEl=document.getElementById("best");
+const statusEl=document.getElementById("status");
+const startBtn=document.getElementById("start");
+
+const SIZE=20;
+const CELLS=20;
+
+let snake,food,dx,dy,score,timer,playing=false;
+let best=Number(localStorage.getItem("snakeBest")||0);
+bestEl.textContent=best;
+
+function randomFood(){
+  let f;
+  do{
+    f={
+      x:Math.floor(Math.random()*CELLS),
+      y:Math.floor(Math.random()*CELLS)
+    };
+  }while(snake.some(s=>s.x===f.x&&s.y===f.y));
+  return f;
+}
+
+function draw(){
+  ctx.fillStyle="#090d18";
+  ctx.fillRect(0,0,400,400);
+
+  ctx.fillStyle="#72f5bd";
+  snake.forEach((part,i)=>{
+    ctx.fillStyle=i===0?"#ffffff":"#72f5bd";
+    ctx.fillRect(part.x*SIZE+1,part.y*SIZE+1,SIZE-2,SIZE-2);
+  });
+
+  ctx.fillStyle="#ff647c";
+  ctx.beginPath();
+  ctx.arc(food.x*SIZE+10,food.y*SIZE+10,8,0,Math.PI*2);
+  ctx.fill();
+}
+
+function reset(){
+  clearInterval(timer);
+  snake=[
+    {x:10,y:10},
+    {x:9,y:10},
+    {x:8,y:10}
+  ];
+  dx=1;dy=0;
+  score=0;
+  scoreEl.textContent=score;
+  food=randomFood();
+  playing=true;
+  startBtn.textContent="RESTART";
+  statusEl.textContent="Collect the red food!";
+  draw();
+  timer=setInterval(update,125);
+}
+
+function update(){
+  let head={x:snake[0].x+dx,y:snake[0].y+dy};
+
+  const eating=head.x===food.x&&head.y===food.y;
+
+  if(head.x<0||head.x>=CELLS||head.y<0||head.y>=CELLS){
+    return endGame();
+  }
+
+  const body=eating?snake:snake.slice(0,-1);
+
+  if(body.some(s=>s.x===head.x&&s.y===head.y)){
+    return endGame();
+  }
+
+  snake.unshift(head);
+
+  if(eating){
+    score+=10;
+    scoreEl.textContent=score;
+    food=randomFood();
+  }else{
+    snake.pop();
+  }
+
+  draw();
+}
+
+function endGame(){
+  clearInterval(timer);
+  playing=false;
+  statusEl.textContent="Game over! Your score: "+score;
+  startBtn.textContent="PLAY AGAIN";
+
+  if(score>best){
+    best=score;
+    localStorage.setItem("snakeBest",best);
+    bestEl.textContent=best;
+  }
+}
+
+function changeDirection(dir){
+  const directions={
+    up:[0,-1],down:[0,1],
+    left:[-1,0],right:[1,0]
+  };
+  const [nx,ny]=directions[dir];
+  if(nx===-dx&&ny===-dy)return;
+  dx=nx;dy=ny;
+}
+
+document.addEventListener("keydown",e=>{
+  const keys={
+    ArrowUp:"up",w:"up",
+    ArrowDown:"down",s:"down",
+    ArrowLeft:"left",a:"left",
+    ArrowRight:"right",d:"right"
+  };
+  const dir=keys[e.key];
+  if(dir&&playing){
+    e.preventDefault();
+    changeDirection(dir);
+  }
+});
+
+document.querySelectorAll("[data-dir]").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    if(playing)changeDirection(btn.dataset.dir);
+  });
+});
+
+startBtn.addEventListener("click",reset);
+
+draw();
+</script>
+</body>
+</html>
